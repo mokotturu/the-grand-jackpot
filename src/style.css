@@ -114,7 +114,7 @@ body {
 }
 
 .stage-sign span {
-	font-size: 7rem;
+	font-size: clamp(3rem, 8vh, 7rem);
 }
 
 @keyframes signSpectrum {
@@ -162,6 +162,7 @@ body {
 	position: relative;
 	width: max-content;
 	max-width: 100%;
+	overflow: hidden;
 	padding: clamp(18px, 2.2vw, 42px);
 	border-radius: 34px 34px 25px 25px;
 	background: linear-gradient(105deg, #292722 0%, #f2e8d0 3%, #95896d 5%, #fff8e6 8%, #8b7a59 11%, #f3ead9 16%, #b5a582 50%, #fff8e4 84%, #77664a 91%, #eee0c2 96%, #24221e 100%);
@@ -241,6 +242,7 @@ body {
 .machine-layout {
 	display: flex;
 	align-items: stretch;
+	min-width: 0;
 	gap: clamp(8px, 0.8vw, 15px);
 }
 
@@ -250,7 +252,8 @@ body {
 	isolation: isolate;
 	overflow: hidden;
 	display: flex;
-	flex: 0 0 clamp(48px, 5.2vw, 82px);
+	flex: 0 1 clamp(48px, 5.2vw, 82px);
+	min-width: 0;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-around;
