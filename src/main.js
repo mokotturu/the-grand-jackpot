@@ -1,22 +1,22 @@
 import './style.css';
 
-// const symbols = [1, 2, 3, 4, 5, 6].map(number => new URL(`./assets/symbol-${number}.svg`, import.meta.url).href);
-const symbolsPaths = [
-  "./assets/cognex-logo.jpg",
-  "./assets/dm290.png",
-  "./assets/frisbee.jpg",
-  "./assets/eddietheyeti-nobg.jpg",
-  "./assets/pumpkin.png",
-  "./assets/coin.png",
-]
-const symbols = symbolsPaths.map(path => new URL(path, import.meta.url).href);
 const payoutAssets = {
   cognex: new URL('./assets/cognex-logo.jpg', import.meta.url).href,
   candy: new URL('./assets/candy.png', import.meta.url).href,
   dm290: new URL('./assets/dm290.png', import.meta.url).href,
   frisbee: new URL('./assets/frisbee.jpg', import.meta.url).href,
   eddie: new URL('./assets/eddietheyeti-nobg.jpg', import.meta.url).href,
+  pumpkin: new URL('./assets/pumpkin.png', import.meta.url).href,
+  coin: new URL('./assets/coin.png', import.meta.url).href,
 };
+const symbols = [
+  payoutAssets.cognex,
+  payoutAssets.dm290,
+  payoutAssets.frisbee,
+  payoutAssets.eddie,
+  payoutAssets.pumpkin,
+  payoutAssets.coin,
+];
 const reels = [...document.querySelectorAll('.reel')];
 const numReels = reels.length;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
