@@ -1,6 +1,22 @@
 import './style.css';
 
-const symbols = [1, 2, 3, 4, 5, 6].map(number => new URL(`./assets/symbol-${number}.svg`, import.meta.url).href);
+// const symbols = [1, 2, 3, 4, 5, 6].map(number => new URL(`./assets/symbol-${number}.svg`, import.meta.url).href);
+const symbolsPaths = [
+  "./assets/cognex-logo.jpg",
+  "./assets/dm290.png",
+  "./assets/frisbee.jpg",
+  "./assets/eddietheyeti-nobg.jpg",
+  "./assets/pumpkin.png",
+  "./assets/coin.png",
+]
+const symbols = symbolsPaths.map(path => new URL(path, import.meta.url).href);
+const payoutAssets = {
+  cognex: new URL('./assets/cognex-logo.jpg', import.meta.url).href,
+  candy: new URL('./assets/candy.png', import.meta.url).href,
+  dm290: new URL('./assets/dm290.png', import.meta.url).href,
+  frisbee: new URL('./assets/frisbee.jpg', import.meta.url).href,
+  eddie: new URL('./assets/eddietheyeti-nobg.jpg', import.meta.url).href,
+};
 const reels = [...document.querySelectorAll('.reel')];
 const numReels = reels.length;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -28,6 +44,10 @@ function tile(src, index) {
 function randomSymbol() {
   return Math.floor(Math.random() * symbols.length);
 }
+
+document.querySelectorAll('[data-payout-asset]').forEach((image) => {
+  image.src = payoutAssets[image.dataset.payoutAsset];
+});
 
 function initialize() {
   reels.forEach((reel, reelIndex) => {
@@ -148,7 +168,15 @@ function spin() {
 }
 
 document.addEventListener('keydown', event => {
-  if (event.key === 'Enter' && !event.repeat) {
+  if (event.key === '`') {
+    event.preventDefault();
+    const payoutPopup = document.querySelector('.payout-popup');
+    const isOpen = payoutPopup?.classList.toggle('is-open') ?? false;
+    payoutPopup?.setAttribute('aria-hidden', String(!isOpen));
+    return;
+  }
+
+  if (event.key !== '`' && !event.repeat) {
     event.preventDefault();
     spin();
   }
